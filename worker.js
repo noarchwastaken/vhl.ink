@@ -11,17 +11,6 @@ addEventListener('fetch', event => {
 	}
 });
 
-const html = `<!DOCTYPE html>
-<body>
-    <pre>
-    use an actual path if you're trying to fetch something.
-    send a POST request with form data "url" and "path" if you're trying to put something.
-    set x-preshared-key header for authentication.
-    
-    source: <a href="https://github.com/VandyHacks/vhl.ink">VandyHacks/vhl.ink</a>
-    </pre>
-</body>`;
-
 /**
  * Respond to POST requests with shortened URL creation
  * @param {Request} request
@@ -92,11 +81,7 @@ async function handleRequest(request) {
 			return new Response(paths, { status: 200 });
 		}
 
-		return new Response(html, {
-			headers: {
-				'content-type': 'text/html;charset=UTF-8',
-			},
-		});
+		return Response.redirect(ROOT, 302);
 	}
 
 	const redirectURL = await LINKS.get(path);
